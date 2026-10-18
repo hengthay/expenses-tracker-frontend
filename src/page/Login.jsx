@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Swal from 'sweetalert2';
 import { loginUser, selectUserToken } from '../feature/auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
@@ -46,7 +46,7 @@ const Login = () => {
       })
 
       const timeOut = setTimeout(() => {
-        navigate('/');
+        navigate('/dashboard');
       }, 2000);
 
       // Clear form
@@ -71,27 +71,27 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 font-sans dark:bg-slate-900 transition-colors duration-200">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-slate-900 dark:text-white">
-          Expense Tracker
-        </h2>
-        <p className="mt-2 text-center text-sm text-slate-600 dark:text-slate-400">
-          Sign in to access your financial dashboard
-        </p>
-      </div>
+    <div className="min-h-dvh bg-slate-50 flex flex-col justify-center items-center py-12 sm:px-6 lg:px-8 font-sans dark:bg-slate-900 transition-colors duration-200 max-w-full max-sm:w-120 mx-auto">
+      <div className='sm:w-120 mx-auto min-h-dvh'>
+        <div className="w-full">
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-slate-900 dark:text-white">
+            Expense Tracker
+          </h2>
+          <p className="mt-2 text-center text-sm text-slate-600 dark:text-slate-400">
+            Sign in to access your financial dashboard
+          </p>
+        </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white dark:bg-slate-800 py-8 px-4 shadow sm:rounded-lg sm:px-10 border border-slate-200 dark:border-slate-700">
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            <div>
-              <label 
-                htmlFor="email" 
-                className="block text-sm font-medium text-slate-700 dark:text-slate-300"
-              >
-                Email address
-              </label>
-              <div className="mt-1">
+        <div className="mt-8 w-full">
+          <div className="w-full bg-white dark:bg-slate-800 py-8 px-4 shadow sm:rounded-lg sm:px-10 border border-slate-200 dark:border-slate-700">
+            <form className="space-y-6 w-full" onSubmit={handleSubmit}>
+              <div className='flex flex-col space-y-1.5'>
+                <label 
+                  htmlFor="email" 
+                  className="block text-sm font-medium text-slate-700 dark:text-slate-300"
+                >
+                  Email address
+                </label>
                 <input
                   id="email"
                   name="email"
@@ -104,16 +104,14 @@ const Login = () => {
                   placeholder="name@example.com"
                 />
               </div>
-            </div>
 
-            <div>
-              <label 
-                htmlFor="password" 
-                className="block text-sm font-medium text-slate-700 dark:text-slate-300"
-              >
-                Password
-              </label>
-              <div className="mt-1">
+              <div className='flex flex-col space-y-1.5'>
+                <label 
+                  htmlFor="password" 
+                  className="block text-sm font-medium text-slate-700 dark:text-slate-300"
+                >
+                  Password
+                </label>
                 <input
                   id="password"
                   name="password"
@@ -126,38 +124,38 @@ const Login = () => {
                   placeholder="••••••••"
                 />
               </div>
-            </div>
 
-            <div>
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-slate-900 hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-500 disabled:opacity-50 transition-colors"
-              >
-                {isLoading ? 'Authenticating...' : 'Sign in'}
-              </button>
-            </div>
-          </form>
-
-          <div className="mt-6">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-slate-300 dark:border-slate-600" />
+              <div className='w-full'>
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-slate-900 hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-500 disabled:opacity-50 transition-colors"
+                >
+                  {isLoading ? 'Authenticating...' : 'Sign in'}
+                </button>
               </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400">
-                  Don't have an account?
-                </span>
-              </div>
-            </div>
+            </form>
 
-            <div className="mt-6 text-center">
-              <a 
-                href="/register" 
-                className="w-full flex justify-center py-2 px-4 border border-slate-300 dark:border-slate-600 rounded-md shadow-sm text-sm font-medium text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900 transition-colors"
-              >
-                Register a new account
-              </a>
+            <div className="mt-6">
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-slate-300 dark:border-slate-600" />
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-2 bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400">
+                    Don't have an account?
+                  </span>
+                </div>
+              </div>
+
+              <div className="mt-6 text-center">
+                <Link 
+                  to={'/register'} 
+                  className="w-full flex justify-center py-2 px-4 border border-slate-300 dark:border-slate-600 rounded-md shadow-sm text-sm font-medium text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900 transition-colors"
+                >
+                  Register a new account
+                </Link>
+              </div>
             </div>
           </div>
         </div>
