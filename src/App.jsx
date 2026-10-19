@@ -7,6 +7,9 @@ import Register from './page/Register'
 import MainDashboardLayout from './components/layout/MainDashboardLayout'
 import NotFound from './page/NotFound'
 import WebInterface from './page/WebInterface'
+import Category from './page/Category'
+import CreateCategory from './components/category/CreateCategory'
+import UpdateCategory from './components/category/UpdateCategory'
 
 const App = () => {
   return (
@@ -15,6 +18,9 @@ const App = () => {
       <Route element={<MainDashboardLayout />}>
         <Route element={<ProtectedRoute />}>
           <Route path='/dashboard' element={<HomePage />} />
+          <Route path='/categories' element={<Category />} />
+          <Route path='/categories/create' element={<CreateCategory />} />
+          <Route path='/categories/edit/:id' element={<UpdateCategory />} />
         </Route>
       </Route>
       <Route path='/login' element={<Login />} />

@@ -31,7 +31,7 @@ const SideBar = ({ isOpen, onClose }) => {
       id: 1,
       iconName: MdDashboard,
       label: "Dashboard",
-      pathName: "/",
+      pathName: "/dashboard",
       roles: ["ADMIN", "USER"],
     },
     {
