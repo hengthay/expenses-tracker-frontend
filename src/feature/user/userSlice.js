@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { API_BASE_URL, axiosInstace } from "../../components/APIConfig";
+import { axiosInstance } from "../../components/APIConfig";
 
 const initialState = {
   usersData: [],
@@ -12,7 +12,7 @@ const initialState = {
 export const fetchAllUsers = createAsyncThunk(
   'users/fetchAllUsers', async (_, thunkAPI) => {
     try {
-      const res = await axiosInstace.get('/users');
+      const res = await axiosInstance.get('/users');
 
       if(!res?.data)
         return thunkAPI.rejectWithValue("No users found.");
@@ -31,7 +31,7 @@ export const fetchAllUsers = createAsyncThunk(
 export const fetchUserById = createAsyncThunk(
   'users/fetchUserById', async (id, thunkAPI) => {
     try {
-      const res = await axiosInstace.get(`/users/${id}`);
+      const res = await axiosInstance.get(`/users/${id}`);
 
       if(!res?.data)
         return thunkAPI.rejectWithValue("No users found.");
@@ -50,7 +50,7 @@ export const fetchUserById = createAsyncThunk(
 export const createUser = createAsyncThunk(
   'users/createUser', async (formData, thunkAPI) => {
     try {
-      const res = await axiosInstace.post('/users', formData);
+      const res = await axiosInstance.post('/users', formData);
 
       if(!res?.data) 
         return thunkAPI.rejectWithValue("Failed to create user.");
@@ -69,7 +69,7 @@ export const createUser = createAsyncThunk(
 export const updateUser = createAsyncThunk(
   'users/updateUser', async ({id, formData}, thunkAPI) => {
     try { 
-      const res = await axiosInstace.put(`/users/${id}`, formData);
+      const res = await axiosInstance.put(`/users/${id}`, formData);
 
       if(!res?.data) 
         return thunkAPI.rejectWithValue("Failed to update user.");
@@ -107,7 +107,7 @@ export const deleteUser = createAsyncThunk(
 export const changeUserPassword = createAsyncThunk(
   'users/changeUserPassword', async ({id, formData}, thunkAPI) => {
     try {
-      const res = await axiosInstace.post(`/users/${id}/change-password`, formData);
+      const res = await axiosInstance.post(`/users/${id}/change-password`, formData);
 
       if(!res?.data) 
         return thunkAPI.rejectWithValue("Failed to change user password.");

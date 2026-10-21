@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { axiosInstace } from "../../components/APIConfig";
+import { axiosInstance } from "../../components/APIConfig";
 
 const initialState = {
   categoriesData: [],
@@ -13,7 +13,7 @@ export const fetchCategories = createAsyncThunk(
   "categories/fetchAll",
   async (_, thunkAPI) => {
     try {
-      const res = await axiosInstace.get(`/categories`);
+      const res = await axiosInstance.get(`/categories`);
 
       if(!res?.data) return thunkAPI.rejectWithValue("No categories found.");
 
@@ -31,7 +31,7 @@ export const fetchCategoryById = createAsyncThunk(
   "categories/fetchCategoryById",
   async (id, thunkAPI) => {
     try {
-      const res = await axiosInstace.get(`/categories/${id}`);
+      const res = await axiosInstance.get(`/categories/${id}`);
 
       if(!res?.data) return thunkAPI.rejectWithValue("No category found.");
 
@@ -49,7 +49,7 @@ export const createCategory = createAsyncThunk(
   "categories/createCategory",
   async (payload, thunkAPI) => {
     try {
-      const res = await axiosInstace.post(`/categories`, payload);
+      const res = await axiosInstance.post(`/categories`, payload);
 
       if(!res?.data) return thunkAPI.rejectWithValue("Error to create category.");
 
@@ -67,7 +67,7 @@ export const updateCategory = createAsyncThunk(
   "categories/updateCategory",
   async ({ id, payload }, thunkAPI) => {
     try {
-      const res = await axiosInstace.put(`/categories/${id}`, payload);
+      const res = await axiosInstance.put(`/categories/${id}`, payload);
 
       if(!res?.data) return thunkAPI.rejectWithValue("Error to update category.");
 
@@ -85,7 +85,7 @@ export const deleteCategory = createAsyncThunk(
   "categories/deleteCategory",
   async (id, thunkAPI) => {
     try {
-      const res = await axiosInstace.delete(`/categories/${id}`);
+      const res = await axiosInstance.delete(`/categories/${id}`);
 
       if(res?.data) return id;
 

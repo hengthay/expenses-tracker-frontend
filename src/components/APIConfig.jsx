@@ -5,7 +5,7 @@ const API = `${import.meta.env.VITE_BASE_URL}`;
 
 const API_BASE_URL = `${API}/api`;
 
-const axiosInstace = axios.create({
+const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
   withCredentials: true,
   headers: {
@@ -15,7 +15,7 @@ const axiosInstace = axios.create({
 });
 
 // check every request api
-axiosInstace.interceptors.request.use((config) => {
+axiosInstance.interceptors.request.use((config) => {
   const userData = localStorage.getItem("userData");
   const parsedUserData = userData ? JSON.parse(userData) : null;
   const token = parsedUserData?.token;
@@ -32,4 +32,4 @@ axiosInstace.interceptors.request.use((config) => {
   return config;
 })
 
-export { axiosInstace, API_BASE_URL };
+export { axiosInstance, API_BASE_URL };

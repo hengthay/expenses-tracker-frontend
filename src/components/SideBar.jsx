@@ -2,10 +2,10 @@ import { useEffect, useMemo, useState } from 'react'
 import { GrTransaction } from 'react-icons/gr';
 import { LuUsersRound } from 'react-icons/lu';
 import { MdDashboard, MdOutlineAccountBalance, MdOutlineCategory, MdOutlineTrackChanges } from 'react-icons/md';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { forceLogout } from '../feature/auth/authSlice';
+import { forceLogout, getCurrentUser, selectRoleAdmin } from '../feature/auth/authSlice';
 import { FiLogOut } from 'react-icons/fi';
 import { RiExpandUpDownLine } from 'react-icons/ri';
 
@@ -15,9 +15,6 @@ const SideBar = ({ isOpen, onClose }) => {
   const [showLogout, setShowLogout] = useState(false);
   const dispatch = useDispatch();
 
-  // User Role
-  const userRole = 'ADMIN';
-
   const handleToggleLogout = () => setShowLogout(prev => !prev);
 
   useEffect(() => {
@@ -25,6 +22,13 @@ const SideBar = ({ isOpen, onClose }) => {
       setShowLogout(false);
     }
   }, [isOpen]);
+
+  // Fetch current users to get role
+  useEffect(() => {
+    dispatch(getCurrentUser());
+  }, []);
+
+  const userRole = useSelector(selectRoleAdmin);
 
   const menuLists = [
     {

@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import axios from "axios";
-import { API_BASE_URL, axiosInstace } from "../../components/APIConfig";
+import { axiosInstance } from "../../components/APIConfig";
 
 const initialState = {
   userData: localStorage.getItem("userData") ? JSON.parse(localStorage.getItem("userData")) : null,
@@ -12,7 +11,7 @@ const initialState = {
 export const loginUser = createAsyncThunk('auth/loginUser', async   (credential, thunkAPI) => {
   try {
     console.log("Redux store credential: ", credential);
-    const res = await axiosInstace.post(`${API_BASE_URL}/auth/login`, credential, {
+    const res = await axiosInstance.post(`/auth/login`, credential, {
       headers: {
         "Content-Type": "application/json"
       }
@@ -34,7 +33,7 @@ export const loginUser = createAsyncThunk('auth/loginUser', async   (credential,
 
 export const getCurrentUser = createAsyncThunk('auth/getCurrentUser', async (_, thunkAPI) => {
   try {
-    const res = await axiosInstace.get(`${API_BASE_URL}/auth/me`);
+    const res = await axiosInstance.get(`/auth/me`);
 
     if(!res?.data) {
       return thunkAPI.rejectWithValue("Failed to get current user!");
@@ -101,4 +100,4 @@ export const selectUserToken = state => state.auth.userData;
 export const selectCurrentUser = state => state.auth.user;
 export const selectUserStatus = state => state.auth.status;
 export const selectUserError = state => state.auth.error;
-export const selectRoleAdmin = state => state.auth.userData?.user?.role;
+export const selectRoleAdmin = state => state.auth.user?.role;

@@ -10,6 +10,11 @@ import WebInterface from './page/WebInterface'
 import Category from './page/Category'
 import CreateCategory from './components/category/CreateCategory'
 import UpdateCategory from './components/category/UpdateCategory'
+import Account from './page/Account'
+import AdminAccount from './page/AdminAccount'
+import AccountRoleBaseRoute from './components/AccountRoleBaseRoute'
+import CreateAccount from './components/account/CreateAccount'
+import UpdateAccount from './components/account/UpdateAccount'
 
 const App = () => {
   return (
@@ -21,6 +26,18 @@ const App = () => {
           <Route path='/categories' element={<Category />} />
           <Route path='/categories/create' element={<CreateCategory />} />
           <Route path='/categories/edit/:id' element={<UpdateCategory />} />
+          {/* Dynamic route by account role */}
+          <Route 
+            path="/accounts" 
+            element={
+              <AccountRoleBaseRoute 
+                userComponent={Account} 
+                adminComponent={AdminAccount} 
+              />
+            }
+          />
+          <Route path='/accounts/create' element={<CreateAccount />}/>
+          <Route path='/accounts/edit/:id' element={<UpdateAccount />}/>
         </Route>
       </Route>
       <Route path='/login' element={<Login />} />
