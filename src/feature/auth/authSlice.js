@@ -58,6 +58,9 @@ const authSlice = createSlice({
       state.status = "idle";
       state.error = null;
       localStorage.removeItem("userData")
+    },
+    resetAuthStatus: (state) => {
+      state.status = "idle";
     }
   },
   extraReducers: (builder) => {
@@ -95,9 +98,9 @@ const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
-export const { forceLogout } = authSlice.actions;
+export const { forceLogout, resetAuthStatus } = authSlice.actions;
 export const selectUserToken = state => state.auth.userData;
 export const selectCurrentUser = state => state.auth.user;
-export const selectUserStatus = state => state.auth.status;
-export const selectUserError = state => state.auth.error;
+export const selectAuthStatus = state => state.auth.status;
+export const selectAuthError = state => state.auth.error;
 export const selectRoleAdmin = state => state.auth.user?.role;

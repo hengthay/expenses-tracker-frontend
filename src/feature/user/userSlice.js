@@ -7,6 +7,7 @@ const initialState = {
   error: null,
   userDataDetail: null,
   statusDetail: "idle",
+  userErrorDetail: null
 }
 
 export const fetchAllUsers = createAsyncThunk(
@@ -85,17 +86,35 @@ export const updateUser = createAsyncThunk(
   }
 )
 
+export const updateUserByAdmin = createAsyncThunk(
+  'users/updateUserByAdmin', async ({id, payload}, thunkAPI) => {
+    try { 
+      const res = await axiosInstance.put(`/users/${id}/admin`, payload);
+
+      if(!res?.data) 
+        return thunkAPI.rejectWithValue("Failed to update user by admin.");
+
+      console.log('User Updated Response: ', res?.data);
+
+      return res?.data ?? null;
+    } catch (error) {
+      const msg = error?.response?.data?.message;
+      console.log('Unable to update user by admin: ', msg)
+      return thunkAPI.rejectWithValue(msg);
+    }
+  }
+)
+
 export const deleteUser = createAsyncThunk(
   'users/deleteUser', async (id, thunkAPI) => {
     try {
-      const res = await axiosInstace.delete(`/users/${id}`);
+      const res = await axiosInstance.delete(`/users/${id}`);
 
-      if(!res?.data)
-        return thunkAPI.rejectWithValue("Failed to delete user.");
+      if(res?.data) return id;
 
-      console.log('User Deleted Response: ', res?.data);
+      if(res?.status === 200 || res?.status === 204) return id;
 
-      return res?.data ?? null;
+      return thunkAPI.rejectWithValue("Error to delete user!");
     } catch (error) {
       const msg = error?.response?.data?.message;
       console.log('Unable to delete user: ', msg)
@@ -127,7 +146,10 @@ const userSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
-
+    resetUserStatus: (state) => {
+      state.status = "idle";
+      state.statusDetail = "idle";
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -150,12 +172,12 @@ const userSlice = createSlice({
       })
       .addCase(fetchUserById.fulfilled, (state, action) => {
         state.statusDetail = 'succeeded';
-        state.error = null;
+        state.userErrorDetail = null;
         state.userDataDetail = action.payload;
       })
       .addCase(fetchUserById.rejected, (state, action) => {
         state.statusDetail = 'failed';
-        state.error = action.payload || "Something went wrong.";
+        state.userErrorDetail = action.payload || "Something went wrong.";
       })
       .addCase(createUser.pending, (state) => {
         state.status = 'loading';
@@ -184,6 +206,23 @@ const userSlice = createSlice({
         state.userDataDetail = updatedUser;
       })
       .addCase(updateUser.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload || "Something went wrong.";
+      })
+      .addCase(updateUserByAdmin.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(updateUserByAdmin.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.error = null;
+        const updatedUser = action.payload;
+
+        state.usersData = state.usersData.map((user) => user.id === updatedUser.id ? updatedUser : user);
+
+        state.userDataDetail = updatedUser;
+      })
+      .addCase(updateUserByAdmin.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload || "Something went wrong.";
       })
@@ -227,8 +266,10 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
+export const { resetUserStatus } = userSlice.actions;
 export const selectUsers = state => state.users.usersData;
 export const selectUserStatus = state => state.users.status;
 export const selectUserError = state => state.users.error;
 export const selectUserDataDetail = state => state.users.userDataDetail;
 export const selectUserStatusDetail = state => state.users.statusDetail;
+export const selectUserErrorDetail = state => state.users.userErrorDetail;

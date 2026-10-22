@@ -15,6 +15,10 @@ import AdminAccount from './page/AdminAccount'
 import AccountRoleBaseRoute from './components/AccountRoleBaseRoute'
 import CreateAccount from './components/account/CreateAccount'
 import UpdateAccount from './components/account/UpdateAccount'
+import UserRoleBaseRoute from './components/UserRoleBaseRoute'
+import UserProfile from './page/UserProfile'
+import AdminUserProfile from './page/AdminUserProfile'
+import AdminUpdateUser from './components/user/AdminUpdateUser'
 
 const App = () => {
   return (
@@ -38,6 +42,16 @@ const App = () => {
           />
           <Route path='/accounts/create' element={<CreateAccount />}/>
           <Route path='/accounts/edit/:id' element={<UpdateAccount />}/>
+          <Route 
+            path="/users" 
+            element={
+              <UserRoleBaseRoute 
+                userComponent={UserProfile} 
+                adminComponent={AdminUserProfile} 
+              />
+            }
+          />
+          <Route path="/users/edit/:id" element={<AdminUpdateUser />} />
         </Route>
       </Route>
       <Route path='/login' element={<Login />} />

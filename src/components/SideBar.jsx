@@ -64,7 +64,7 @@ const SideBar = ({ isOpen, onClose }) => {
       iconName: LuUsersRound,
       label: "User Management",
       pathName: "/users",
-      roles: ["ADMIN"],
+      roles: ["ADMIN", "USER"],
     },
   ];
 
