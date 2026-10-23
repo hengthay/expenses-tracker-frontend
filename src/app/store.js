@@ -2,7 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "../feature/auth/authSlice";
 import userReducer from "../feature/user/userSlice";
 import categoryReducer from "../feature/categories/categorySlice";
-import accountReducer from "../feature/account/accountSlice";
+import accountReducer from "../feature/accounts/accountSlice";
+import transactionReducer from "../feature/transactions/transactionSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     users: userReducer,
     categories: categoryReducer,
     accounts: accountReducer,
+    transactions: transactionReducer
   }
 })
 

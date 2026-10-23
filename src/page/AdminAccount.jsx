@@ -12,7 +12,7 @@ import {
 } from 'react-icons/fi';
 import { BsFolderCheck } from 'react-icons/bs';
 import { HiOutlineBuildingLibrary } from 'react-icons/hi2';
-import { fetchAllAccounts, selectAllAccountError, selectAllAccounts, selectAllAccountStatus } from '../feature/account/accountSlice';
+import { fetchAllAccounts, selectAllAccountError, selectAllAccounts, selectAllAccountStatus } from '../feature/accounts/accountSlice';
 import AdminAccountCard from '../components/account/AdminAccountCard';
 
 const AdminAccount = () => {

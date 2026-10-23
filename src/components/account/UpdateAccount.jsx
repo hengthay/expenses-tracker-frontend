@@ -6,7 +6,7 @@ import {
   selectAccountErrorDetail,
   selectAccountStatusDetail,
   updateAccount,
-} from "../../feature/account/accountSlice";
+} from "../../feature/accounts/accountSlice";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {

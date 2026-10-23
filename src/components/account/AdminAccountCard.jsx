@@ -4,7 +4,7 @@ import { formatDate } from "../helper/formatDate";
 import { BsPiggyBank, BsWallet2 } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { deleteAccount, resetAccountStatus } from "../../feature/account/accountSlice";
+import { deleteAccount, resetAccountStatus } from "../../feature/accounts/accountSlice";
 import Swal from "sweetalert2";
 
 const AdminAccountCard = ({ account, isCash }) => {

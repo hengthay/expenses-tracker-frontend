@@ -16,7 +16,7 @@ import { useDispatch } from "react-redux";
 import {
   deleteAccount,
   resetAccountStatus,
-} from "../../feature/account/accountSlice";
+} from "../../feature/accounts/accountSlice";
 import { TbUserEdit } from "react-icons/tb";
 
 const AccountCard = ({ account, isCash }) => {

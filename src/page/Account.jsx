@@ -15,9 +15,8 @@ import {
 } from 'react-icons/fi';
 import { BsLock } from 'react-icons/bs';
 import { HiOutlineBuildingLibrary } from 'react-icons/hi2';
-import { fetchAllAccounts, fetchMyAccount, selectAccountError, selectAccounts, selectAccountStatus } from '../feature/account/accountSlice';
+import { fetchMyAccount, selectAccountError, selectAccounts, selectAccountStatus } from '../feature/accounts/accountSlice';
 import AccountCard from '../components/account/AccountCard';
-import { getCurrentUser, selectCurrentUser, selectRoleAdmin } from '../feature/auth/authSlice';
 
 const TRANSACTION_TYPES = {
   INFLOW: {

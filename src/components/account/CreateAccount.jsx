@@ -10,7 +10,7 @@ import {
   FiInfo,
 } from 'react-icons/fi';
 import { HiOutlineBuildingLibrary } from 'react-icons/hi2';
-import { createAccount, resetAccountStatus } from '../../feature/account/accountSlice';
+import { createAccount, resetAccountStatus } from '../../feature/accounts/accountSlice';
 import Swal from 'sweetalert2';
 
 const CreateAccount = () => {

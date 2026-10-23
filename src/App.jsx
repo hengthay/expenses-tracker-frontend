@@ -19,6 +19,10 @@ import UserRoleBaseRoute from './components/UserRoleBaseRoute'
 import UserProfile from './page/UserProfile'
 import AdminUserProfile from './page/AdminUserProfile'
 import AdminUpdateUser from './components/user/AdminUpdateUser'
+import Transaction from './page/Transaction'
+import AdminTransaction from './page/AdminTransaction'
+import CreateTransaction from './components/transaction/CreateTransaction'
+import UpdateTransaction from './components/transaction/UpdateTransaction'
 
 const App = () => {
   return (
@@ -52,6 +56,17 @@ const App = () => {
             }
           />
           <Route path="/users/edit/:id" element={<AdminUpdateUser />} />
+          <Route 
+            path="/transactions" 
+            element={
+              <UserRoleBaseRoute 
+                userComponent={Transaction} 
+                adminComponent={AdminTransaction} 
+              />
+            }
+          />
+          <Route path="/transactions/create" element={<CreateTransaction />} />
+          <Route path="/transactions/edit/:id" element={<UpdateTransaction />} />
         </Route>
       </Route>
       <Route path='/login' element={<Login />} />
